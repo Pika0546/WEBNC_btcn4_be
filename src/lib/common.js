@@ -1,0 +1,6 @@
+export const APIStatus = {
+    OK: "OK",
+    NOT_FOUND:"NOT_FOUND",
+    INTERNAL_ERROR: "INTERNAL_ERROR",
+    AUTHENTICATE:"AUTHENTICATE"
+}

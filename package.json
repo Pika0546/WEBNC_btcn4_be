@@ -1,0 +1,48 @@
+{
+  "name": "test-rest-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Khoa Le",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "transpile": "babel src -D --out-dir dist",
+    "start": "yarn run clean && yarn run transpile && node dist/app.js",
+    "clean": "rimraf dist",
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "http-errors": "^2.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.5",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
+    "path": "^0.12.7",
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.4",
+    "nodemon": "^2.0.20"
+  },
+  "nodemonConfig": {
+    "exec": "yarn run start",
+    "watch": [
+      "server/*",
+      "public/*",
+      "src/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  }
+}
