@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import { APIStatus } from './lib/common';
 import { myCors } from './middleware/cors';
 import { router } from './route';
+import { connectDB } from './config/database';
 
 dotenv.config();
 const port = 3030;
@@ -20,10 +21,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(myCors());
 router(app)
 
-app.listen(process.env.PORT || port, () => {
-    console.log(`Example app listening at http://localhost:${process.env.PORT || port}`);
-})
-
-
+connectDB().then((result) => {
+    console.log(result);
+    app.listen(process.env.PORT || port, () => {
+        console.log(`Example app listening at http://localhost:${process.env.PORT || port}`);
+    })
+}).catch(e => {
+	console.log(e);
+});
 
 

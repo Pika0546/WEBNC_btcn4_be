@@ -1,6 +1,6 @@
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import passport from 'passport';
-import Account from '../model/account'
+import Account from '../components/account/accountModel'
 import { JWT_KEY } from '.';
 
 const validateAccount = async (jwt_payload, done) => {

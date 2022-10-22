@@ -4,11 +4,6 @@ import bcrypt from 'bcryptjs';
 import { BCRYPT_SALT, JWT_KEY } from "../../config";
 
 const AccountSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    },
     username: {
         type: String,
         required: true,
@@ -17,7 +12,6 @@ const AccountSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLength: 7
     },
     tokens: [{
         token: {
@@ -25,14 +19,6 @@ const AccountSchema = new mongoose.Schema({
             required: true
         }
     }],
-    gender: Boolean,
-    dob: Date,
-    type: String, //parent or child?
-    phone: {
-        type: String,
-        minLength: 7
-    },
-    children: [{type: mongoose.Schema.Types.ObjectId, ref: 'AccountSchema'}] //self-reference: cha mẹ có thể có nhìu con cái
 })
 
 //hash pwd
