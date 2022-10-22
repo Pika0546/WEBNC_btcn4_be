@@ -22,7 +22,6 @@ app.use(myCors());
 router(app)
 
 connectDB().then((result) => {
-    console.log(result);
     app.listen(process.env.PORT || port, () => {
         console.log(`Example app listening at http://localhost:${process.env.PORT || port}`);
     })

@@ -18,7 +18,7 @@ export const login = async (req, res, next) => {
                 message: "LOGIN SUCCESS",
             })
         } else{
-            return res.status(401).send({
+            return res.status(401).json({
                 status: APIStatus.AUTHENTICATE,
                 message: response.message
             })
@@ -34,15 +34,47 @@ export const login = async (req, res, next) => {
 
 export const signup = async (req, res, next) => {
     try {
+        const {username, password} = req.body;
+        if(!username || !password){
+            return res.status(400).json({
+                status: APIStatus.INVALID_INPUT,
+                message: "username or password is missing"
+            })
+        }
+        const old = await AccountService.findAccount({username: username});
+        if(old){
+            return res.status(400).json({
+                status: APIStatus.EXISTED,
+                message: "Username existed"
+            })
+        }
         const account = await AccountService.createAccount(req.body);
         const token = await account.generateAuthToken()
-        res.status(201).send({
+        res.status(200).json({
             status: APIStatus.OK,
             data:[{
                 account,
                 token,
             }],
             message: "Create account successfully"
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            status: APIStatus.INTERNAL_ERROR,
+            message: error.message
+        })
+    }
+}
+
+
+export const getAccountList = async (req, res, next) => {
+    try {
+        const data = await AccountService.getAccoutList({});
+        res.status(200).json({
+            statsu: APIStatus.OK,
+            data:[data],
+            message: "Query account successfully"
         })
     } catch (error) {
         console.log(error)

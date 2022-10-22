@@ -14,7 +14,7 @@ const getToken = (headers) => {
 export const auth = async (req, res, next) => {
     const token = getToken(req.headers);
     if(!token){
-        res.status(403).send({
+        res.status(403).json({
             status: "AUTHENTICATE",
             message: "Unauthorized"
         })
