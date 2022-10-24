@@ -72,8 +72,8 @@ export const getAccountList = async (req, res, next) => {
     try {
         const data = await AccountService.getAccoutList({});
         res.status(200).json({
-            statsu: APIStatus.OK,
-            data:[data],
+            status: APIStatus.OK,
+            data:[...data],
             message: "Query account successfully"
         })
     } catch (error) {
